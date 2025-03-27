@@ -145,6 +145,7 @@ import scarecrow from './items/scarecrow.png'
 import scarecrowAnimated from './items/scarecrow-animated.gif'
 import sprinkler from './items/sprinkler.png'
 import cowFeed from './items/cow-feed.png'
+import adjustedcowFeed from './items/adjusted-cow-feed.png'
 import huggingMachine from './items/hugging-machine.png'
 import milk1 from './items/milk-1.png'
 import milk2 from './items/milk-2.png'
@@ -154,6 +155,7 @@ import rainbowMilk2 from './items/rainbow-milk-2.png'
 import rainbowMilk3 from './items/rainbow-milk-3.png'
 import chocolateMilk from './items/chocolate-milk.png'
 import inventoryBox from './items/inventory-box.png'
+import watercredit from './items/water-credit.png'
 import weedYellow from './items/weed-yellow.png'
 import weedOrange from './items/weed-orange.png'
 import weedPink from './items/weed-pink.png'
@@ -411,6 +413,8 @@ export const items = {
 
   // Cow items
   'cow-feed': cowFeed,
+  'adjusted-cow-feed': adjustedcowFeed,
+  'water-credit': watercredit,
   'hugging-machine': huggingMachine,
   'milk-1': milk1,
   'milk-2': milk2,

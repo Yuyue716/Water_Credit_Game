@@ -161,12 +161,13 @@ export const scarecrow = freeze({
  * @type {farmhand.item}
  */
 export const watercredit = freeze({
-  description: 'Credit for waste water, each cow consume one unit of water credit per day (if you adopt sustainable farming practice, it will consume less!)',
-  enablesFieldMode: fieldMode.USE_WATER_CREDIT, // Define this in `enums.js` if needed
   id: WATER_CREDIT_ID,
+  description:
+    'Credit for waste water, each cow consume one unit of water credit per day (if you adopt sustainable farming practice, it will consume less!)',
+  enablesFieldMode: fieldMode.USE_WATER_CREDIT, // Define this in `enums.js` if needed
   name: 'Water Credit',
-  type:  WATER_CREDIT, 
-  value: 10, 
+  type: WATER_CREDIT,
+  value: 10,
 })
 
 ////////////////////////////////////////

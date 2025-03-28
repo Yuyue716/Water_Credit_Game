@@ -1,10 +1,8 @@
 // From: https://www.section.io/engineering-education/desktop-application-with-react/
-const path = require('path')
-
-const { app, BrowserWindow } = require('electron')
-const isDev = require('electron-is-dev')
-
-const { autoUpdater } = require('electron-updater')
+import path from 'path';
+import { app, BrowserWindow } from 'electron';
+import isDev from 'electron-is-dev';
+import { autoUpdater } from 'electron-updater';
 
 function createWindow() {
   // Create the browser window.

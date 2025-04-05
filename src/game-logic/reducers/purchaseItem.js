@@ -35,6 +35,12 @@ export const purchaseItem = (state, item, howMany = 1) => {
     PURCHASED_ITEM_PEER_NOTIFICATION`${howMany}${item}`
   )
 
+  const updatedState = addItemToInventory(state, item)
+
+  if (updatedState.inventoryAddBlocked) {
+    return updatedState // skip charging money
+}
+
   return addItemToInventory(
     {
       ...state,

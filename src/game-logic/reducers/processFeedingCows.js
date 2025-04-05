@@ -3,11 +3,15 @@ import {
   COW_FEED_ITEM_ID,
   ADJUSTED_COW_FEED_ITEM_ID,
   WATER_CREDIT_ID,
+  MANURE_MANAGER_ID,
   COW_WEIGHT_MULTIPLIER_FEED_BENEFIT,
   COW_WEIGHT_MULTIPLIER_MAXIMUM,
   COW_WEIGHT_MULTIPLIER_MINIMUM,
 } from '../../constants.js'
-import { OUT_OF_COW_FEED_NOTIFICATION,OUT_OF_WATER_CREDIT_NOTIFICATION } from '../../strings.js'
+import { 
+  OUT_OF_COW_FEED_NOTIFICATION,
+  OUT_OF_WATER_CREDIT_NOTIFICATION 
+} from '../../strings.js'
 
 import { decrementItemFromInventory } from './decrementItemFromInventory.js'
 
@@ -21,10 +25,10 @@ export const processFeedingCows = state => {
   const newDayNotifications = [...state.newDayNotifications]
   const inventory = [...state.inventory]
 
+  // Find items in inventory
   const cowFeedInventoryPosition = inventory.findIndex(
     ({ id }) => id === COW_FEED_ITEM_ID
   )
-
   const cowFeed = inventory[cowFeedInventoryPosition]
   const cowFeedQuantity = cowFeed ? cowFeed.quantity : 0
 
@@ -34,18 +38,25 @@ export const processFeedingCows = state => {
   const adjustedCowFeed = inventory[adjustedCowFeedInventoryPosition]
   const adjustedFeedQuantity = adjustedCowFeed ? adjustedCowFeed.quantity : 0
 
-
-   // Find Water Credit in Inventory
   const waterCreditInventoryPosition = inventory.findIndex(
     ({ id }) => id === WATER_CREDIT_ID
   )
   const waterCredit = inventory[waterCreditInventoryPosition]
   const waterCreditQuantity = waterCredit ? waterCredit.quantity : 0
 
+  // Check if player has manure manager
+  const hasManureManager = inventory.some(
+    ({ id }) => id === MANURE_MANAGER_ID
+  )
+
   let adjustedUnitsSpent = 0
   let cowFeedUnitsSpent = 0
   let waterUnitsSpent = 0
   let waterCreditsEarned = 0
+
+  // Calculate water credits from manure manager (1 per cow)
+  const manureManagerCredits = hasManureManager ? cowInventoryLength : 0
+  waterCreditsEarned += manureManagerCredits 
 
   for (let i = 0; i < cowInventoryLength; i++) {
     const cow = cowInventory[i]
@@ -54,11 +65,9 @@ export const processFeedingCows = state => {
     const hasWater = waterUnitsSpent < waterCreditQuantity
 
     if (hasAdjustedFeed) {
-      // Cow consumes ADJUSTED_COW_FEED (instead of COW_FEED)
       adjustedUnitsSpent++
       waterCreditsEarned++ // Gain 1 water credit per adjusted feed consumed
     } else if (hasCowFeed) {
-      // Only if no ADJUSTED_COW_FEED, consume normal COW_FEED
       cowFeedUnitsSpent++
     }
 
@@ -91,18 +100,18 @@ export const processFeedingCows = state => {
       severity: 'error',
     })
   }
+
   return decrementItemFromInventory(
     decrementItemFromInventory(
       decrementItemFromInventory(
         { ...state, cowInventory, inventory, newDayNotifications },
         COW_FEED_ITEM_ID,
         cowFeedUnitsSpent
-        ),
-    WATER_CREDIT_ID,
-    waterUnitsSpent - waterCreditsEarned
+      ),
+      WATER_CREDIT_ID,
+      waterUnitsSpent - waterCreditsEarned
     ),
     ADJUSTED_COW_FEED_ITEM_ID,
     adjustedUnitsSpent
-);
-
+  )
 }

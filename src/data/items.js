@@ -182,7 +182,7 @@ export const manureManager = freeze({
   enablesFieldMode: fieldMode.BUY_MANURE_MANAGER, // Define this in `enums.js` if needed
   name: 'Manure Manager',
   type: MANURE_MANAGER,
-  value: 100,
+  value: 1000,
 })
 ////////////////////////////////////////
 //
@@ -213,7 +213,7 @@ export const adjustedcowFeed = freeze({
     'Adjusted cow feed that allow cows to produce less nitrogen. Each cow automatically consumes one unit of Adjusted Cow Feed per day. Using one unit of adjusted cow feed can earn you one unit of water credit. Fed cows gain and maintain weight.',
   name: 'Adjusted Cow Feed',
   type: ADJUSTED_COW_FEED,
-  value: 5,
+  value: 7,
 })
 
 /**

@@ -25,6 +25,7 @@ export const categoryIds = new Map([
   ['CRAFTED_ITEMS', 'CRAFTED_ITEMS'],
   ['MINED_RESOURCES', 'MINED_RESOURCES'],
   ['WATER_CREDIT', 'WATER_CREDIT'],
+  ['MANURE_MANAGER', 'MANURE_MANAGER'],
 ])
 
 const itemTypeCategoryMap = new Map([
@@ -42,6 +43,7 @@ const itemTypeCategoryMap = new Map([
   ['STONE', 'MINED_RESOURCES'],
   ['WEED', 'FORAGED_ITEMS'],
   ['WATER_CREDIT', 'WATER_CREDIT'],
+  ['MANURE_MANAGER', 'MANURE_MANAGER'],
 ])
 
 // Initialize Map to group items into categories

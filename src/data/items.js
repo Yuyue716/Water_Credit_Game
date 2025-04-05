@@ -9,6 +9,7 @@ import {
   HUGGING_MACHINE_ITEM_ID,
   INITIAL_SPRINKLER_RANGE,
   WATER_CREDIT_ID,
+  MANURE_MANAGER_ID,
 } from '../constants.js'
 
 const { freeze } = Object
@@ -22,6 +23,7 @@ const {
   SPRINKLER,
   WEED,
   WATER_CREDIT,
+  MANURE_MANAGER,
 } = itemType
 
 export {
@@ -157,7 +159,7 @@ export const scarecrow = freeze({
 })
 
 /**
- * @property farmhand.module:items.waterCredit
+ * @property farmhand.module:items.watercredit
  * @type {farmhand.item}
  */
 export const watercredit = freeze({
@@ -170,6 +172,18 @@ export const watercredit = freeze({
   value: 10,
 })
 
+/**
+ * @property farmhand.module:items.manureManager
+ * @type {farmhand.item}
+ */
+export const manureManager = freeze({
+  id: MANURE_MANAGER_ID,
+  description: 'something smart',
+  enablesFieldMode: fieldMode.BUY_MANURE_MANAGER, // Define this in `enums.js` if needed
+  name: 'Manure Manager',
+  type: MANURE_MANAGER,
+  value: 100,
+})
 ////////////////////////////////////////
 //
 // COW ITEMS

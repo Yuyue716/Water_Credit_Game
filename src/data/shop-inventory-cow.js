@@ -1,5 +1,17 @@
-import { adjustedcowFeed, cowFeed, huggingMachine, watercredit} from './items.js'
+import {
+  adjustedcowFeed,
+  cowFeed,
+  huggingMachine,
+  manureManager,
+  watercredit,
+} from './items.js'
 
-const inventory = [adjustedcowFeed, cowFeed, huggingMachine,watercredit]
+const inventory = [
+  adjustedcowFeed,
+  cowFeed,
+  huggingMachine,
+  watercredit,
+  manureManager,
+]
 
 export default inventory

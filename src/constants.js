@@ -129,6 +129,7 @@ export const COW_FEED_ITEM_ID = 'cow-feed'
 export const ADJUSTED_COW_FEED_ITEM_ID = 'adjusted-cow-feed'
 export const HUGGING_MACHINE_ITEM_ID = 'hugging-machine'
 export const WATER_CREDIT_ID = 'water-credit'
+export const MANURE_MANAGER_ID = 'manure-manager'
 
 export const COW_MAXIMUM_VALUE_MATURITY_AGE = 100
 export const COW_MINIMUM_VALUE_MULTIPLIER = 0

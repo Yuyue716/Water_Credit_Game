@@ -28,6 +28,7 @@ import {
   scarecrow,
   sprinkler,
   watercredit,
+  manureManager,
 } from './items.js'
 
 import { fertilizer } from './recipes.js'
@@ -60,6 +61,7 @@ const inventory = [
   scarecrow,
   sprinkler,
   watercredit,
+  manureManager,
 ]
 
 export default inventory

@@ -159,6 +159,7 @@ import watercredit from './items/water-credit.png'
 import weedYellow from './items/weed-yellow.png'
 import weedOrange from './items/weed-orange.png'
 import weedPink from './items/weed-pink.png'
+import manureManager from './items/manure-manager.png'
 
 // Tools
 import hoe from './tools/hoe.png'
@@ -415,6 +416,7 @@ export const items = {
   'cow-feed': cowFeed,
   'adjusted-cow-feed': adjustedcowFeed,
   'water-credit': watercredit,
+  'manure-manager': manureManager,
   'hugging-machine': huggingMachine,
   'milk-1': milk1,
   'milk-2': milk2,

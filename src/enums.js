@@ -67,6 +67,7 @@ export const fieldMode = enumify([
   'SET_SCARECROW',
   'WATER',
   'USE_WATER_CREDIT',
+  'BUY_MANURE_MANAGER',
 ])
 
 /**
@@ -110,6 +111,7 @@ export const itemType = enumify([
   'TOOL_UPGRADE',
   'WEED',
   'WATER_CREDIT',
+  'MANURE_MANAGER',
 ])
 
 /**

@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from 'react'
+import React, { Component, useEffect, useState } from 'react'
 import { array, bool, func, object, string } from 'prop-types'
 import classNames from 'classnames'
 import { Tweenable } from 'shifty'
@@ -7,12 +7,13 @@ import Typography from '@mui/material/Typography/index.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 
-import { LEFT, RIGHT } from '../../constants.js'
+import { LEFT, RIGHT, MANURE_MANAGER_ID } from '../../constants.js'
 import FarmhandContext from '../Farmhand/Farmhand.context.js'
 import { pixel } from '../../img/index.js'
+import { items } from '../../img/index.js'
+const manureManagerImage = items['manure-manager']
 
 import { getCowDisplayName, getCowImage } from '../../utils/index.js'
-
 import './CowPen.sass'
 import { random } from '../../common/utils.js'
 
@@ -77,24 +78,24 @@ export class Cow extends Component {
 
   move = async () => {
     const newX = randomPosition()
-
+  
     const { moveDirection: oldDirection, x, y } = this.state
     const newDirection = newX < this.state.x ? LEFT : RIGHT
-
+  
     this.setState({
       moveDirection: newDirection,
     })
-
+  
     if (oldDirection !== newDirection) {
       /** @type {import('shifty').RenderFunction} */
       const render = ({ rotate }) => {
         this.setState({ rotate })
       }
-
+  
       try {
         const duration = Cow.flipAnimationDuration
         const easing = 'swingTo'
-
+  
         if (newDirection === LEFT) {
           await this.tweenable.tween({
             from: {
@@ -125,11 +126,11 @@ export class Cow extends Component {
         return
       }
     }
-
+  
     this.setState({
       isTransitioning: true,
     })
-
+  
     try {
       await this.tweenable.tween({
         from: { x, y },
@@ -144,7 +145,7 @@ export class Cow extends Component {
       // The tween was cancelled by the component unmounting
       return
     }
-
+  
     this.setState({ isTransitioning: false })
     this.scheduleMove()
   }
@@ -267,6 +268,53 @@ Cow.propTypes = {
   isSelected: bool.isRequired,
 }
 
+export const ManureManager = ({ cowInventory }) => {
+  const [isActive] = useState(false)
+
+  return (
+    <div
+      className={classNames('manure-manager', { 'is-active': isActive })}
+      style={{
+        position: 'absolute',
+        left: '10%',
+        top: '5%',
+        width: '100px',
+        height: '100px',
+        zIndex: 5,
+        transform: 'translateX(-50%)',
+      }}
+    >
+      <img 
+        src={manureManagerImage} 
+        alt="Manure Manager"
+        style={{ width: '100%', height: '100%' }}
+      />
+      {isActive && (
+        <div className="water-credit-particles">
+          {[...Array(cowInventory.length)].map((_, i) => (
+            <div key={i} className="water-credit-particle" />
+          ))}
+        </div>
+      )}
+      <Tooltip
+        arrow
+        placement="top"
+        title={
+          <Typography>
+            Manure Manager: Generates {cowInventory.length} water credit(s) daily
+          </Typography>
+        }
+      >
+        <div className="manure-manager-tooltip-target" />
+      </Tooltip>
+    </div>
+  )
+}
+
+ManureManager.propTypes = {
+  cowInventory: array.isRequired,
+}
+
 export const CowPen = ({
   allowCustomPeerCowNames,
   cowInventory,
@@ -274,12 +322,15 @@ export const CowPen = ({
   handleCowClick,
   id,
   selectedCowId,
+  inventory,
 }) => {
   useEffect(() => {
     return () => {
       handleCowPenUnmount()
     }
   }, [handleCowPenUnmount])
+
+  const hasManureManager = inventory.some(item => item.id === MANURE_MANAGER_ID)
 
   return (
     <div className="CowPen fill">
@@ -296,6 +347,8 @@ export const CowPen = ({
           }}
         />
       ))}
+      
+      {hasManureManager && <ManureManager cowInventory={cowInventory} />}
     </div>
   )
 }
@@ -307,6 +360,7 @@ CowPen.propTypes = {
   handleCowPenUnmount: func.isRequired,
   id: string.isRequired,
   selectedCowId: string.isRequired,
+  inventory: array.isRequired,
 }
 
 export default function Consumer(props) {

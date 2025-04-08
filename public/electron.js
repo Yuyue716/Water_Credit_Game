@@ -1,11 +1,12 @@
-// From: https://www.section.io/engineering-education/desktop-application-with-react/
 import path from 'path';
-const { app, BrowserWindow } = require('electron');
-import isDev from 'electron-is-dev';
-import { autoUpdater } from 'electron-updater';
+import electron from 'electron';
+import electronIsDev from 'electron-is-dev';
+import electronUpdater from 'electron-updater';
+
+const { app, BrowserWindow } = electron;
+const { autoUpdater } = electronUpdater;
 
 function createWindow() {
-  // Create the browser window.
   const win = new BrowserWindow({
     width: 1024,
     height: 768,
@@ -13,40 +14,31 @@ function createWindow() {
       nodeIntegration: true,
     },
     icon: path.join(__dirname, './app-icons/Icon-512x512.png'),
-  })
+  });
 
-  // and load the index.html of the app.
-  // win.loadFile("index.html");
-  const hostUrl = isDev
+  const hostUrl = electronIsDev
     ? 'http://localhost:3000'
-    : `file://${path.join(__dirname, '../build/index.html')}`
+    : `file://${path.join(__dirname, '../build/index.html')}`;
 
-  win.loadURL(hostUrl)
+  win.loadURL(hostUrl);
 
-  // Open the DevTools.
-  if (isDev) {
-    win.webContents.openDevTools({ mode: 'detach' })
+  if (electronIsDev) {
+    win.webContents.openDevTools({ mode: 'detach' });
   }
 
-  autoUpdater.checkForUpdatesAndNotify()
+  autoUpdater.checkForUpdatesAndNotify();
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
-app.whenReady().then(createWindow)
+app.whenReady().then(createWindow);
 
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
-    app.quit()
+    app.quit();
   }
-})
+});
 
 app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow()
+    createWindow();
   }
-})
+});

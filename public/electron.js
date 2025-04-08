@@ -1,6 +1,10 @@
+import { fileURLToPath } from 'url';
 import path from 'path';
-import { app, BrowserWindow } from 'electron';
+import electron from 'electron';
 import electronIsDev from 'electron-is-dev';
+
+const { app, BrowserWindow } = electron;
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -10,12 +14,12 @@ function createWindow() {
       nodeIntegration: true,
       contextIsolation: false
     },
-    icon: path.join(process.cwd(), './public/app-icons/Icon-512x512.png'),
+    icon: path.join(__dirname, 'app-icons/Icon-512x512.png'),
   });
 
   const hostUrl = electronIsDev
     ? 'http://localhost:3000'
-    : `file://${path.join(process.cwd(), './dist/index.html')}`;
+    : `file://${path.join(__dirname, '../dist/index.html')}`;
 
   win.loadURL(hostUrl);
 

@@ -6,6 +6,12 @@
   },
   "description": "A farming game",
   "main": "public/electron.js",
+  "exports": {
+    ".": {
+      "import": "./public/electron.js",
+      "require": "./public/electron.js"
+    }
+  },
   "unpkg": "dist/index.html",
   "homepage": "https://www.farmhand.life/",
   "type": "module",
@@ -15,8 +21,9 @@
     "check:types": "tsc",
     "check:types:noerror": "tsc; exit 0",
     "dev": "mprocs \"cross-env VITE_TRACKER_URL='ws://localhost:8000' npm run start\" \"npm run start:api\" \"npm run start:backend\" \"npm run start:tracker\"",
-    "dev:native": "mprocs \"BROWSER=none npm run start\" \"npm run start:api\" \"npm run start:backend\" \"npm run electron\"",
+    "dev:native": "cross-env ELECTRON_IS_DEV=1 mprocs \"BROWSER=none npm run start\" \"npm run start:api\" \"npm run start:backend\" \"npm run electron\"",
     "electron": "wait-on tcp:3000 && electron .",
+    "start:native": "npm run start & npm run electron",
     "print:crops": "npx babel-node --presets @babel/preset-env --presets babel-preset-vite src/scripts/generate-crop-table.js",
     "lint": "eslint src --max-warnings=0",
     "prettier": "prettier 'src/**/*.js' --write",
@@ -34,7 +41,7 @@
   "license": "GPL-2.0-or-later",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jeremyckahn/farmhand.git"
+    "url": "https://github.com/Yuyue716/Water_Credit_Game.git"
   },
   "engines": {
     "node": "18.x"
@@ -60,7 +67,7 @@
     "browserslist": "^4.21.9",
     "cheerio": "^1.0.0-rc.3",
     "cross-env": "^7.0.2",
-    "electron": "^22.1.0",
+    "electron": "^28.1.0",
     "electron-builder": "^24.13.3",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
@@ -114,7 +121,7 @@
     "compass-mixins": "^0.12.12",
     "dinero.js": "^1.7.0",
     "electron-is-dev": "^2.0.0",
-    "electron-updater": "^6.3.0",
+    "electron-updater": "^6.1.7",
     "fast-memoize": "^2.5.2",
     "file-saver": "^2.0.2",
     "fs": "npm:browserify-fs@^1.0.0",
@@ -156,10 +163,11 @@
     "productName": "Farmhand",
     "extraMetadata": {
       "name": "Farmhand",
-      "main": "dist/electron.js"
+      "main": "public/electron.js"
     },
     "files": [
       "dist/**/*",
+      "public/**/*",
       "node_modules/**/*"
     ],
     "directories": {

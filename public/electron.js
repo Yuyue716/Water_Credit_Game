@@ -1,7 +1,6 @@
-const path = require('path');
-const { app, BrowserWindow } = require('electron');
-
-const isDev = process.env.NODE_ENV === 'development';
+import path from 'path';
+import { app, BrowserWindow } from 'electron';
+import electronIsDev from 'electron-is-dev';
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -11,16 +10,16 @@ function createWindow() {
       nodeIntegration: true,
       contextIsolation: false
     },
-    icon: path.join(__dirname, './app-icons/Icon-512x512.png'),
+    icon: path.join(process.cwd(), './public/app-icons/Icon-512x512.png'),
   });
 
-  win.loadURL(
-    isDev
-      ? 'http://localhost:3000'
-      : `file://${path.join(__dirname, '../build/index.html')}`
-  );
+  const hostUrl = electronIsDev
+    ? 'http://localhost:3000'
+    : `file://${path.join(process.cwd(), './dist/index.html')}`;
 
-  if (isDev) {
+  win.loadURL(hostUrl);
+
+  if (electronIsDev) {
     win.webContents.openDevTools({ mode: 'detach' });
   }
 }

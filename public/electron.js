@@ -1,6 +1,6 @@
 // From: https://www.section.io/engineering-education/desktop-application-with-react/
 import path from 'path';
-import { app, BrowserWindow } from 'electron';
+const { app, BrowserWindow } = require('electron');
 import isDev from 'electron-is-dev';
 import { autoUpdater } from 'electron-updater';
 

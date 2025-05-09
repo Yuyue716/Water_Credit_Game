@@ -178,7 +178,7 @@ export const watercredit = freeze({
  */
 export const manureManager = freeze({
   id: MANURE_MANAGER_ID,
-  description: 'something smart',
+  description: 'A machine that sustainably processes manure waste. Purchasing a Manure Manager earns you one unit of water credit per cow every day!',
   enablesFieldMode: fieldMode.BUY_MANURE_MANAGER, // Define this in `enums.js` if needed
   name: 'Manure Manager',
   type: MANURE_MANAGER,

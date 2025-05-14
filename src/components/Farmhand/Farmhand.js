@@ -386,25 +386,28 @@ export default class Farmhand extends FarmhandReducers {
     const { CELLAR, COW_PEN, HOME, WORKSHOP, FOREST } = stageFocusType
     const viewList = [...STANDARD_VIEW_LIST]
 
-    if (this.state.showHomeScreen) {
-      viewList.unshift(HOME)
-    }
+    // Remove FIELD from STANDARD_VIEW_LIST
+    const filteredViewList = viewList.filter(view => view !== 'FIELD')
 
-    if (this.isForestUnlocked && features.FOREST) {
-      viewList.push(FOREST)
+    if (this.state.showHomeScreen) {
+      filteredViewList.unshift(HOME)
     }
 
     if (this.state.purchasedCowPen) {
-      viewList.push(COW_PEN)
+      filteredViewList.splice(1, 0, COW_PEN)
     }
 
-    viewList.push(WORKSHOP)
+    if (this.isForestUnlocked && features.FOREST) {
+      filteredViewList.push(FOREST)
+    }
+
+    filteredViewList.push(WORKSHOP)
 
     if (this.state.purchasedCellar) {
-      viewList.push(CELLAR)
+      filteredViewList.push(CELLAR)
     }
 
-    return viewList
+    return filteredViewList
   }
 
   get levelEntitlements() {
@@ -476,7 +479,7 @@ export default class Farmhand extends FarmhandReducers {
       historicalValueAdjustments: [],
       hoveredPlotRangeSize: 0,
       id: uuid(),
-      inventory: [{ id: scarecrow.id, quantity: 1 }],
+      inventory: [{ id: scarecrow.id, quantity: 0 }],
       inventoryLimit: INITIAL_STORAGE_LIMIT,
       isAwaitingCowTradeRequest: false,
       isAwaitingNetworkRequest: false,
@@ -515,7 +518,7 @@ export default class Farmhand extends FarmhandReducers {
       sendCowReject: noop,
       purchasedCombine: 0,
       purchasedComposter: 0,
-      purchasedCowPen: 0,
+      purchasedCowPen: 1,
       purchasedCellar: 0,
       purchasedField: 0,
       purchasedForest: 0,
@@ -624,7 +627,7 @@ export default class Farmhand extends FarmhandReducers {
 
     Object.assign(this.keyHandlers, {
       clearPersistedData: () => this.clearPersistedData(),
-      waterAllPlots: () => this.waterAllPlots(),
+      //waterAllPlots: () => this.waterAllPlots(),
     })
   }
 

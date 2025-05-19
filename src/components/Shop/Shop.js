@@ -19,7 +19,7 @@ import {
 } from '../../utils/index.js'
 import { memoize } from '../../utils/memoize.js'
 import { items } from '../../img/index.js'
-import { itemType, stageFocusType, toolType } from '../../enums.js'
+import { toolType, stageFocusType } from '../../enums.js'
 import {
   INFINITE_STORAGE_LIMIT,
   PURCHASEABLE_CELLARS,
@@ -40,18 +40,15 @@ import './Shop.sass'
 
 /**
  * @param {Array.<farmhand.item>} shopInventory
- * @returns {Object.<'seeds' | 'fieldTools', Array.<farmhand.item>>}
+ * @returns {Object.<'fieldTools', Array.<farmhand.item>>}
  */
 const categorizeShopInventory = memoize(shopInventory =>
   shopInventory.reduce(
     (acc, inventoryItem) => {
-      acc[inventoryItem.type === itemType.CROP ? 'seeds' : 'fieldTools'].push(
-        inventoryItem
-      )
-
+      acc.fieldTools.push(inventoryItem)
       return acc
     },
-    { seeds: [], fieldTools: [] }
+    { fieldTools: [] }
   )
 )
 
@@ -81,7 +78,7 @@ export const Shop = ({
 }) => {
   const [currentTab, setCurrentTab] = useState(0)
 
-  const { seeds, fieldTools } = categorizeShopInventory(shopInventory)
+  const { fieldTools } = categorizeShopInventory(shopInventory)
 
   const isForestUnlocked =
     levelEntitlements.stageFocusType[stageFocusType.FOREST]
@@ -93,20 +90,10 @@ export const Shop = ({
         onChange={(_e, newTab) => setCurrentTab(newTab)}
         aria-label="Shop tabs"
       >
-        <Tab {...{ label: 'Seeds', ...a11yProps(0) }} />
-        <Tab {...{ label: 'Supplies', ...a11yProps(1) }} />
-        <Tab {...{ label: 'Upgrades', ...a11yProps(2) }} />
+        <Tab {...{ label: 'Supplies', ...a11yProps(0) }} />
+        <Tab {...{ label: 'Upgrades', ...a11yProps(1) }} />
       </Tabs>
       <TabPanel value={currentTab} index={0}>
-        <Inventory
-          {...{
-            items: seeds,
-            isPurchaseView: true,
-            placeholder: 'Search seeds...',
-          }}
-        />
-      </TabPanel>
-      <TabPanel value={currentTab} index={1}>
         <Inventory
           {...{
             items: fieldTools,
@@ -115,7 +102,7 @@ export const Shop = ({
           }}
         />
       </TabPanel>
-      <TabPanel value={currentTab} index={2}>
+      <TabPanel value={currentTab} index={1}>
         <ul className="card-list">
           {inventoryLimit > INFINITE_STORAGE_LIMIT && (
             <li>
@@ -161,21 +148,6 @@ export const Shop = ({
               </Card>
             </li>
           )}
-
-          <li>
-            <TierPurchase
-              {...{
-                onBuyClick: handleFieldPurchase,
-                maxedOutPlaceholder:
-                  "You've purchased the largest field available!",
-                purchasedTier: purchasedField,
-                renderTierLabel: ({ columns, price, rows }) =>
-                  `${dollarString(price)}: ${columns} x ${rows}`,
-                tiers: PURCHASEABLE_FIELD_SIZES,
-                title: 'Expand field',
-              }}
-            />
-          </li>
           <li>
             <TierPurchase
               {...{
@@ -187,84 +159,6 @@ export const Shop = ({
                   `${dollarString(price)}: ${cows} cow pen`,
                 tiers: PURCHASEABLE_COW_PENS,
                 title: 'Buy cow pen',
-              }}
-            />
-          </li>
-          <li>
-            <TierPurchase
-              {...{
-                onBuyClick: handleCellarPurchase,
-                maxedOutPlaceholder:
-                  "You've purchased the largest cellar available!",
-                purchasedTier: purchasedCellar,
-                renderTierLabel: ({ space, price }) =>
-                  `${dollarString(price)}: Space for ${space} kegs`,
-                tiers: PURCHASEABLE_CELLARS,
-                title: 'Buy cellar',
-              }}
-            />
-          </li>
-          {features.FOREST && isForestUnlocked ? (
-            <li>
-              <TierPurchase
-                {...{
-                  onBuyClick: handleForestPurchase,
-                  maxedOutPlaceholder:
-                    "You've purchased the largest forest available!",
-                  purchasedTier: purchasedForest,
-                  renderTierLabel: ({ columns, price, rows }) =>
-                    `${dollarString(price)}: ${columns} x ${rows}`,
-                  tiers: PURCHASABLE_FOREST_SIZES,
-                  title: 'Expand Forest',
-                }}
-              />
-            </li>
-          ) : null}
-          <li>
-            <TierPurchase
-              {...{
-                description:
-                  'You can purchase a combine to automatically harvest your mature crops at the start of every day.',
-                onBuyClick: handleCombinePurchase,
-                maxedOutPlaceholder:
-                  "You've purchased the best combine harvester available!",
-                purchasedTier: purchasedCombine,
-                renderTierLabel: ({ type, price }) =>
-                  `${dollarString(price)}: ${type} combine harvester`,
-                tiers: PURCHASEABLE_COMBINES,
-                title: 'Buy combine harvester',
-              }}
-            />
-          </li>
-          {toolLevels[toolType.SHOVEL] ? (
-            <li>
-              <TierPurchase
-                {...{
-                  description:
-                    'You can purchase a Smelter to convert ore into ingots and other useful items.',
-                  onBuyClick: handleSmelterPurchase,
-                  maxedOutPlaceholder: "You've already purchased the smelter!",
-                  purchasedTier: purchasedSmelter,
-                  renderTierLabel: ({ type, price }) =>
-                    `${dollarString(price)}: ${type} Smelter`,
-                  tiers: PURCHASEABLE_SMELTERS,
-                  title: 'Buy smelter',
-                }}
-              />
-            </li>
-          ) : null}
-          <li>
-            <TierPurchase
-              {...{
-                description:
-                  'You can purchase a Composter to turn weeds into fertilizer.',
-                onBuyClick: handleComposterPurchase,
-                maxedOutPlaceholder: "You've already purchased the composter!",
-                purchasedTier: purchasedComposter,
-                renderTierLabel: ({ type, price }) =>
-                  `${dollarString(price)}: ${type} Composter`,
-                tiers: PURCHASEABLE_COMPOSTERS,
-                title: 'Buy composter',
               }}
             />
           </li>

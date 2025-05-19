@@ -472,7 +472,7 @@ export default class Farmhand extends FarmhandReducers {
       historicalValueAdjustments: [],
       hoveredPlotRangeSize: 0,
       id: uuid(),
-      inventory: [{ id: scarecrow.id, quantity: 1 }],
+      inventory: [{ id: scarecrow.id, quantity: 0}],
       inventoryLimit: INITIAL_STORAGE_LIMIT,
       isAwaitingCowTradeRequest: false,
       isAwaitingNetworkRequest: false,

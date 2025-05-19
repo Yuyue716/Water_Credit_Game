@@ -16,29 +16,21 @@ import './Inventory.sass'
 
 // Using Map for categories to preserve key order and enable Map methods
 export const categoryIds = new Map([
-  ['CROPS', 'CROPS'],
-  ['SEEDS', 'SEEDS'],
-  ['FORAGED_ITEMS', 'FORAGED_ITEMS'],
-  ['FIELD_TOOLS', 'FIELD_TOOLS'],
   ['ANIMAL_PRODUCTS', 'ANIMAL_PRODUCTS'],
   ['ANIMAL_SUPPLIES', 'ANIMAL_SUPPLIES'],
   ['CRAFTED_ITEMS', 'CRAFTED_ITEMS'],
-  ['MINED_RESOURCES', 'MINED_RESOURCES'],
   ['WATER_CREDIT', 'WATER_CREDIT'],
   ['MANURE_MANAGER', 'MANURE_MANAGER'],
 ])
 
 const itemTypeCategoryMap = new Map([
-  ['SEEDS', 'SEEDS'],
   ['COW_FEED', 'ANIMAL_SUPPLIES'],
   ['CRAFTED_ITEM', 'CRAFTED_ITEMS'],
-  ['CROP', 'CROPS'],
   ['FERTILIZER', 'FIELD_TOOLS'],
   ['FUEL', 'MINED_RESOURCES'],
   ['HUGGING_MACHINE', 'ANIMAL_SUPPLIES'],
   ['MILK', 'ANIMAL_PRODUCTS'],
   ['ORE', 'MINED_RESOURCES'],
-  ['SCARECROW', 'FIELD_TOOLS'],
   ['SPRINKLER', 'FIELD_TOOLS'],
   ['STONE', 'MINED_RESOURCES'],
   ['WEED', 'FORAGED_ITEMS'],

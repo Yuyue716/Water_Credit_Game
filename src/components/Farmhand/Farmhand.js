@@ -383,31 +383,24 @@ export default class Farmhand extends FarmhandReducers {
   }
 
   get viewList() {
-    const { CELLAR, COW_PEN, HOME, WORKSHOP, FOREST } = stageFocusType
+    const { CELLAR, COW_PEN, HOME, WORKSHOP } = stageFocusType
     const viewList = [...STANDARD_VIEW_LIST]
 
-    // Remove FIELD from STANDARD_VIEW_LIST
-    const filteredViewList = viewList.filter(view => view !== 'FIELD')
-
     if (this.state.showHomeScreen) {
-      filteredViewList.unshift(HOME)
+      viewList.unshift(HOME)
     }
 
     if (this.state.purchasedCowPen) {
-      filteredViewList.splice(1, 0, COW_PEN)
+      viewList.push(COW_PEN)
     }
 
-    if (this.isForestUnlocked && features.FOREST) {
-      filteredViewList.push(FOREST)
-    }
-
-    filteredViewList.push(WORKSHOP)
+    viewList.push(WORKSHOP)
 
     if (this.state.purchasedCellar) {
-      filteredViewList.push(CELLAR)
+      viewList.push(CELLAR)
     }
 
-    return filteredViewList
+    return viewList
   }
 
   get levelEntitlements() {
@@ -479,7 +472,7 @@ export default class Farmhand extends FarmhandReducers {
       historicalValueAdjustments: [],
       hoveredPlotRangeSize: 0,
       id: uuid(),
-      inventory: [{ id: scarecrow.id, quantity: 0 }],
+      inventory: [{ id: scarecrow.id, quantity: 1 }],
       inventoryLimit: INITIAL_STORAGE_LIMIT,
       isAwaitingCowTradeRequest: false,
       isAwaitingNetworkRequest: false,
@@ -627,7 +620,7 @@ export default class Farmhand extends FarmhandReducers {
 
     Object.assign(this.keyHandlers, {
       clearPersistedData: () => this.clearPersistedData(),
-      //waterAllPlots: () => this.waterAllPlots(),
+      waterAllPlots: () => this.waterAllPlots(),
     })
   }
 

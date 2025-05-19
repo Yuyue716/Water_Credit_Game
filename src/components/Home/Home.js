@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { func, object } from 'prop-types'
+import { func } from 'prop-types'
 import ReactMarkdown from 'react-markdown'
 import globalWindow from 'global/window.js'
 import Button from '@mui/material/Button/index.js'
@@ -14,29 +14,13 @@ import CardContent from '@mui/material/CardContent/index.js'
 
 import { items } from '../../img/index.js'
 
-import { achievementsMap } from '../../data/achievements.js'
 import FarmhandContext from '../Farmhand/Farmhand.context.js'
 import { STANDARD_LOAN_AMOUNT } from '../../constants.js'
 import { stageFocusType } from '../../enums.js'
 import { isDecember } from '../../utils/index.js'
-import { memoize } from '../../utils/memoize.js'
-import Achievement from '../Achievement/index.js'
 
 import { SnowBackground } from './SnowBackground.js'
 import './Home.sass'
-
-const onboardingAchievements = [
-  achievementsMap['plant-crop'],
-  achievementsMap['water-crop'],
-  achievementsMap['harvest-crop'],
-  achievementsMap['purchase-cow-pen'],
-]
-
-const getRemainingOnboardingAchievements = memoize(completedAchievements =>
-  onboardingAchievements.filter(
-    achievement => achievement && !completedAchievements[achievement.id]
-  )
-)
 
 const environmentAllowsInstall = ['production', 'development'].includes(
   import.meta.env?.MODE
@@ -48,20 +32,12 @@ const VALID_ORIGINS = [
   'http://localhost:3000',
 ]
 
-// https://stackoverflow.com/questions/41742390/javascript-to-check-if-pwa-or-mobile-web/41749865#41749865
 const isInstallable =
   environmentAllowsInstall &&
   !globalWindow.matchMedia('(display-mode: standalone)').matches &&
   VALID_ORIGINS.includes(globalWindow.location.origin)
 
-const Home = ({
-  completedAchievements,
-  handleViewChangeButtonClick,
-
-  remainingOnboardingAchievements = getRemainingOnboardingAchievements(
-    completedAchievements
-  ),
-}) => (
+const Home = ({ handleViewChangeButtonClick }) => (
   <div className="Home">
     {isDecember() ? (
       <>
@@ -110,28 +86,6 @@ If you can master the art of the harvest, there's no limit to how profitable you
     `,
           }}
         />
-        {remainingOnboardingAchievements.length ? (
-          <>
-            <ReactMarkdown
-              {...{
-                className: 'markdown',
-                linkTarget: '_blank',
-                source: `
-### Getting started
-
-It looks like you're new here. Thanks for stopping by! Here are some goals to help you get familiar with the game.
-    `,
-              }}
-            />
-            <ul className="card-list">
-              {remainingOnboardingAchievements.map(achievement => (
-                <li {...{ key: achievement.id }}>
-                  <Achievement {...{ achievement }} />
-                </li>
-              ))}
-            </ul>
-          </>
-        ) : null}
         <Button
           {...{
             color: 'primary',
@@ -204,16 +158,13 @@ If you're playing on a mobile device, all you need to do is [add it to your home
 )
 
 Home.propTypes = {
-  completedAchievements: object.isRequired,
   handleViewChangeButtonClick: func.isRequired,
 }
 
 export default function Consumer(props) {
   return (
     <FarmhandContext.Consumer>
-      {({ gameState, handlers }) => (
-        <Home {...{ ...gameState, ...handlers, ...props }} />
-      )}
+      {({ gameState, handlers }) => <Home {...{ ...handlers, ...props }} />}
     </FarmhandContext.Consumer>
   )
 }

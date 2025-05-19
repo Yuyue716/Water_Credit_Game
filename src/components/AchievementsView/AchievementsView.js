@@ -14,18 +14,15 @@ import { memoize } from '../../utils/memoize.js'
 
 import './AchievementsView.sass'
 
-const partitionAchievements = memoize(completedAchievements =>
+const partitionAchievements = memoize(() =>
   achievements.reduce(
     (acc, achievement) => {
-      acc[
-        completedAchievements[achievement.id] ? 'complete' : 'incomplete'
-      ].push(achievement)
-
+      acc.incomplete.push(achievement) // Force everything into incomplete
       return acc
     },
     {
-      /** @type {farmhand.achievement[]} */ complete: [],
-      /** @type {farmhand.achievement[]} */ incomplete: [],
+      complete: [],
+      incomplete: [],
     }
   )
 )

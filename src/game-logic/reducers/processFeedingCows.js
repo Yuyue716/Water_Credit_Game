@@ -88,7 +88,7 @@ export const processFeedingCows = state => {
     }
   }
 
-  if (cowFeedQuantity <= cowInventoryLength && cowInventoryLength > 0) {
+  if ((cowFeedQuantity + adjustedCowFeed) <= cowInventoryLength && cowInventoryLength > 0) {
     newDayNotifications.push({
       message: OUT_OF_COW_FEED_NOTIFICATION,
       severity: 'error',

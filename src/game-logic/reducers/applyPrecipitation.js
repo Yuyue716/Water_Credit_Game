@@ -1,10 +1,5 @@
 import { fertilizerType } from '../../enums.js'
 import { getInventoryQuantityMap } from '../../utils/getInventoryQuantityMap.js'
-import {
-  RAIN_MESSAGE,
-  STORM_MESSAGE,
-  STORM_DESTROYS_SCARECROWS_MESSAGE,
-} from '../../strings.js'
 import { shouldStormToday } from '../../utils/index.js'
 
 import {
@@ -22,41 +17,29 @@ import { waterField } from './waterField.js'
 export const applyPrecipitation = state => {
   let { field } = state
   let scarecrowsConsumedByReplanting = 0
-  let notification
 
-  if (shouldStormToday()) {
-    if (fieldHasScarecrow(field)) {
-      notification = {
-        message: STORM_DESTROYS_SCARECROWS_MESSAGE,
-        severity: 'error',
+  if (shouldStormToday() && fieldHasScarecrow(field)) {
+    let { scarecrow: scarecrowsInInventory = 0 } = getInventoryQuantityMap(
+      state.inventory
+    )
+
+    field = updateField(field, plot => {
+      if (!plotContainsScarecrow(plot)) {
+        return plot
       }
 
-      let { scarecrow: scarecrowsInInventory = 0 } = getInventoryQuantityMap(
-        state.inventory
-      )
+      if (
+        scarecrowsInInventory &&
+        plot.fertilizerType === fertilizerType.RAINBOW
+      ) {
+        scarecrowsInInventory--
+        scarecrowsConsumedByReplanting++
 
-      field = updateField(field, plot => {
-        if (!plotContainsScarecrow(plot)) {
-          return plot
-        }
+        return plot
+      }
 
-        if (
-          scarecrowsInInventory &&
-          plot.fertilizerType === fertilizerType.RAINBOW
-        ) {
-          scarecrowsInInventory--
-          scarecrowsConsumedByReplanting++
-
-          return plot
-        }
-
-        return null
-      })
-    } else {
-      notification = { message: STORM_MESSAGE, severity: 'info' }
-    }
-  } else {
-    notification = { message: RAIN_MESSAGE, severity: 'info' }
+      return null
+    })
   }
 
   state = decrementItemFromInventory(
@@ -64,11 +47,6 @@ export const applyPrecipitation = state => {
     'scarecrow',
     scarecrowsConsumedByReplanting
   )
-
-  state = {
-    ...state,
-    newDayNotifications: [...state.newDayNotifications, notification],
-  }
 
   state = waterField(state)
 

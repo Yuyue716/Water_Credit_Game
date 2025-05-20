@@ -1,7 +1,6 @@
 import {
   adjustedcowFeed,
   cowFeed,
-  huggingMachine,
   manureManager,
   watercredit,
 } from './items.js'
@@ -9,7 +8,6 @@ import {
 const inventory = [
   adjustedcowFeed,
   cowFeed,
-  huggingMachine,
   watercredit,
   manureManager,
 ]

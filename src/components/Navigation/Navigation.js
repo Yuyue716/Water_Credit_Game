@@ -133,12 +133,11 @@ export const Navigation = ({
 }) => {
   return (
     <header className="Navigation">
-      <h1>Virtual Farm</h1>
-      <p>I found the name y'all, we can fuck with it now!</p>
-      <p className="version">
-        v{import.meta.env?.VITE_FARMHAND_PACKAGE_VERSION}
+      <h1>WOW COW</h1>
+      <p>
+        <strong>W</strong>ater <strong>O</strong>ptimization for <strong>W</strong>elfare in <br/> <strong>C</strong>attle and <strong>O</strong>ur <strong>W</strong>orld
       </p>
-      <FarmNameDisplay {...{ farmName, handleFarmNameUpdate }} />
+
       <DayAndProgressContainer />
       
       {inventoryLimit > INFINITE_STORAGE_LIMIT && (

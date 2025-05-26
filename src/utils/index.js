@@ -597,12 +597,6 @@ export const getCowMilkItem = (
   if (color === cowColors.BROWN) {
     return chocolateMilk
   }
-  console.log('Debug cow milk inputs:', {
-    manureManagerCount,
-    adjustedCowFeed,
-    cowCount,
-})
-
   const isRainbowCow = color === cowColors.RAINBOW
 
   let score = 0
@@ -624,6 +618,32 @@ export const getCowMilkItem = (
   }
 }
 
+/**
+ * @param {Object} inventory
+ * @param {number} inventory.manureManagerCount
+ * @param {number} inventory.adjustedCowFeed
+ * @param {number} inventory.cowCount
+ * @returns {'A' | 'B' | 'C'}
+ */
+export const getSustainabilityLevelFromMilk = ({ manureManagerCount = 0, adjustedCowFeed = 0, cowCount = 1 } = {}) => {
+  let score = 0
+  console.log('Debug cow milk inputs:', {
+    manureManagerCount,
+    adjustedCowFeed,
+    cowCount,
+})
+  if (manureManagerCount > 0) {
+    score += 1 / 3
+  }
+
+  if (adjustedCowFeed >= cowCount) {
+    score += 1 / 3
+  }
+
+  if (score >= 2 / 3) return 'A'
+    else if (score >= 1 / 3) return 'B'
+      else return 'C'
+}
 
 
 /**

@@ -1,5 +1,5 @@
 import React from 'react'
-import { number, object } from 'prop-types'
+import { number, object, array} from 'prop-types'
 
 import Box from '@mui/material/Box/index.js'
 import CircularProgress from '@mui/material/CircularProgress/index.js'
@@ -83,7 +83,7 @@ DayAndProgressContainer.propTypes = {
   experience: number.isRequired,
   itemsSold: object.isRequired,  
   inventory: object.isRequired,
-  cowInventory: object.isRequired,
+  cowInventory: array.isRequired,
 }
 
 export default function Consumer(props) {

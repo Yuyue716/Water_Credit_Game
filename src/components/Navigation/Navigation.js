@@ -137,6 +137,14 @@ export const Navigation = ({
       <p>
         <strong>W</strong>ater <strong>O</strong>ptimization for <strong>W</strong>elfare in <br/> <strong>C</strong>attle and <strong>O</strong>ur <strong>W</strong>orld
       </p>
+      <br/>
+      <p>
+        Edited based on{' '}
+        <a href="https://github.com/jeremyckahn/farmhand?tab=readme-ov-file" target="_blank" rel="noopener noreferrer">
+          Farmhand
+        </a>{' '}
+        by Jeremy Kahn
+      </p>
 
       <DayAndProgressContainer />
       

@@ -290,7 +290,7 @@ export const Item = ({
           ),
         }}
       />
-      {isPurchaseView && (description || isReplantable) && (
+      {(description || isReplantable) && (
         <CardContent>
           {description && <Typography>{description}</Typography>}
           {isReplantable && (

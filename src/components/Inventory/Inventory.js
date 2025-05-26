@@ -24,6 +24,7 @@ import './Inventory.sass'
 export const categoryIds = new Map([
   ['ANIMAL_PRODUCTS', 'ANIMAL_PRODUCTS'],
   ['ANIMAL_SUPPLIES', 'ANIMAL_SUPPLIES'],
+  ['FIELD_TOOLS', 'FIELD_TOOLS'],
   ['CRAFTED_ITEMS', 'CRAFTED_ITEMS'],
   ['WATER_CREDIT', 'WATER_CREDIT'],
   ['MANURE_MANAGER', 'MANURE_MANAGER'],
@@ -31,6 +32,7 @@ export const categoryIds = new Map([
 
 const itemTypeCategoryMap = new Map([
   ['COW_FEED', 'ANIMAL_SUPPLIES'],
+  ['ADJUSTED_COW_FEED', 'ANIMAL_SUPPLIES'],
   ['CRAFTED_ITEM', 'CRAFTED_ITEMS'],
   ['FERTILIZER', 'FIELD_TOOLS'],
   ['FUEL', 'MINED_RESOURCES'],
@@ -93,8 +95,10 @@ const manureManagerCount = playerInventory.filter(({ id }) => id === 'manure-man
 const adjustedCowFeedItem = playerInventory.find(({ id }) => id === 'adjusted-cow-feed');
 const adjustedCowFeed = adjustedCowFeedItem ? adjustedCowFeedItem.quantity : 0;
 
-console.log('Manure Managers:', manureManagerCount);
-console.log('Adjusted Cow Feed Quantity:', adjustedCowFeed);
+console.log('All items:', items.map(i => i.id));
+console.log('Categories:', [...itemCategories.entries()]);
+console.log('itemsMap["adjusted-cow-feed"]:', itemsMap['adjusted-cow-feed']);
+
 
   const filteredCategories = Array.from(itemCategories.entries()).reduce(
     (filtered, [category, items]) => {

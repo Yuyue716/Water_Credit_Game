@@ -5,6 +5,7 @@
 import {
   watercredit,
   manureManager,
+  adjustedcowFeed,
 } from './items.js'
 
 import { fertilizer } from './recipes.js'
@@ -13,6 +14,8 @@ import { fertilizer } from './recipes.js'
 const inventory = [
   watercredit,
   manureManager,
+  fertilizer,
+  adjustedcowFeed,
 ]
 
 export default inventory

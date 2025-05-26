@@ -98,6 +98,7 @@ export const cropLifeStage = enumify(['SEED', 'GROWING', 'GROWN'])
  */
 export const itemType = enumify([
   'COW_FEED',
+  'ADJUSTED_COW_FEED',
   'CRAFTED_ITEM',
   'CROP',
   'FERTILIZER',

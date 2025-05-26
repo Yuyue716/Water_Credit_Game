@@ -235,6 +235,7 @@ export const huggingMachine = freeze({
 export const milk1 = freeze({
   id: 'milk-1',
   name: 'Sustainability Grade C Milk',
+  description: 'The sustainability grade of this milk aligns with your farms sustainbality level on that day. The more sustainable your farm is, the better price you can get when selling! ',
   type: MILK,
   value: 40,
 })
@@ -246,6 +247,7 @@ export const milk1 = freeze({
 export const milk2 = freeze({
   id: 'milk-2',
   name: 'Sustainability Grade B Milk',
+  description: 'The sustainability grade of this milk aligns with your farms sustainbality level on that day. The more sustainable your farm is, the better price you can get when selling! ',
   type: MILK,
   value: 80,
 })
@@ -257,6 +259,7 @@ export const milk2 = freeze({
 export const milk3 = freeze({
   id: 'milk-3',
   name: 'Sustainability Grade A Milk',
+  description: 'The sustainability grade of this milk aligns with your farms sustainbality level on that day. The more sustainable your farm is, the better price you can get when selling! ',
   type: MILK,
   value: 120,
 })
@@ -268,6 +271,7 @@ export const milk3 = freeze({
 export const rainbowMilk1 = freeze({
   id: 'rainbow-milk-1',
   name: 'Sustainiability Grade C Rainbow Milk',
+  description: 'The sustainability grade of this milk aligns with your farms sustainbality level on that day. The more sustainable your farm is, the better price you can get when selling! ',
   type: MILK,
   value: 60,
 })
@@ -279,6 +283,7 @@ export const rainbowMilk1 = freeze({
 export const rainbowMilk2 = freeze({
   id: 'rainbow-milk-2',
   name: 'Sustainability Grade B Rainbow Milk',
+  description: 'The sustainability grade of this milk aligns with your farms sustainbality level on that day. The more sustainable your farm is, the better price you can get when selling! ',
   type: MILK,
   value: 120,
 })
@@ -290,6 +295,7 @@ export const rainbowMilk2 = freeze({
 export const rainbowMilk3 = freeze({
   id: 'rainbow-milk-3',
   name: 'Sustainability Grade A Rainbow Milk',
+  description: 'The sustainability grade of this milk aligns with your farms sustainbality level on that day. The more sustainable your farm is, the better price you can get when selling! ',
   type: MILK,
   value: 180,
 })

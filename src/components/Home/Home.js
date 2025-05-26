@@ -74,7 +74,7 @@ const Home = ({
         </h1>
       </>
     ) : (
-      <h1>Welcome!</h1>
+      <h1>Explore the water credit with a farming game!</h1>
     )}
     <Accordion>
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
@@ -86,7 +86,7 @@ const Home = ({
             linkTarget: '_blank',
             className: 'markdown',
             source: `
-Hi, you're playing **Farmhand**! This is an open source game project created by Jeremy Kahn and edited by project group HoTsPot. It simulates Water Credits, their role in livestock farming and other items/technology that is available in real-life and can help farmers save up more Water Credits.
+Hi, you're playing **WOWCOW**! This is an open source game project created by Jeremy Kahn and edited by project group HoTsPot. It simulates Water Credits, their role in livestock farming and other items/technology that is available in real-life and can help farmers save up more Water Credits.
 
 This game is still in alpha version, so any opinions and suggestions are welcome!
     `,
@@ -102,12 +102,26 @@ This game is still in alpha version, so any opinions and suggestions are welcome
             className: 'markdown',
             linkTarget: '_blank',
             source: `
-### How to play
+### What is WOWCOW?
 
-The goal of Farmhand is to make money by buying, growing, harvesting, and then selling crops. Keep an eye on prices though, because they go up and down every day! The best farmers buy seeds for a low price and sell them for a high price.
+WOWCOW is an educational game where you play as a farmer managing a dairy farm. The goal is to maximize profit while balancing water sustainability.
 
-If you can master the art of the harvest, there's no limit to how profitable you can become! Every farmer starts with a $${STANDARD_LOAN_AMOUNT} loan from the bank. If you run out of money, you can always take out another loan. Be careful though, because the bank takes a portion of your sales until the debt is repaid. You can access your bank account in the menu.
-    `,
+### Key Game Mechanics
+#### 1. Buying Cows
+
+  Each cow has a unique price, and only female ones produce milk. You can refresh available cows by advancing to the next day (red button).  
+
+  
+#### 2. Water Credits System
+
+  Every cow consumes 1 water credit/day, representing water pollution from the manure. You have to buy enough water credit for all cows to be able to advance to the next day.  
+
+#### 3. Sustainable Farming Practices
+
+  You can adapt sustainable farming practices (using adjusted cow feed/manure manager) to earn more water credits and improve the sustainability level of your farm.
+
+  A higher sustainability level allows you to sell your milk at a better price.
+  `,
           }}
         />
         {remainingOnboardingAchievements.length ? (
@@ -170,23 +184,13 @@ If you're playing on a mobile device, all you need to do is [add it to your home
             source: `
 ### A few other tips
 
-* Press the bed button in the top-right of the screen to end the farm day and advance the game. This also saves your progress.
+* Press the red bed button in the top-right of the screen to end the farm day and advance the game. This also saves your progress.
 
-* Crops need to be watered daily to grow.
+* Your milk sustainability level aligns with your farms' sustainability level displayed at the navigation bar. 
 
-* Keep the field free of weeds with the scythe or the hoe.
+* You can check your daily log, farm stats, achievements and settings at the blue icons in the navigation bar.
 
-* Crafting items out of harvested crops in the Workshop is an excellent way to make money!
-
-* Purchasing a cow pen will allow you to buy, sell, milk, and breed cows. Can you breed the mythical Rainbow Cow?
-
-* Put up a scarecrow to protect your field!
-
-* Watch your inventory space as you obtain items. You can purchase additional Storage Units in the shop.
-
-* You'll be able to unlock new crops and items as you level up. Sell crops, milk, and crafted items to gain experience!
-
-* Bank loans accrue interest daily, so pay off your balance as soon as you can.
+* Make sure you feed your cows everyday, otherwise they will starve and run away!
 
 * Press "Shift + ?" to see all of the keyboard shortcuts available to you.
 

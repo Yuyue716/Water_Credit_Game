@@ -133,7 +133,8 @@ export const Navigation = ({
 }) => {
   return (
     <header className="Navigation">
-      <h1>Farmhand</h1>
+      <h1>Virtual Farm</h1>
+      <p>I found the name y'all, we can fuck with it now!</p>
       <p className="version">
         v{import.meta.env?.VITE_FARMHAND_PACKAGE_VERSION}
       </p>

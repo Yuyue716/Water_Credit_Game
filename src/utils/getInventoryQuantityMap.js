@@ -10,8 +10,7 @@ export const getInventoryQuantityMap = memoize(
    */
   inventory =>
     inventory.reduce((acc, { id, quantity }) => {
-      acc[id] = quantity
-
-      return acc
-    }, {})
+  acc[id] = (acc[id] || 0) + quantity;
+  return acc;
+  }, {})
 )

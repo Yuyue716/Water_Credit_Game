@@ -234,7 +234,7 @@ export const huggingMachine = freeze({
  */
 export const milk1 = freeze({
   id: 'milk-1',
-  name: 'Grade C Milk',
+  name: 'Sustainability Grade C Milk',
   type: MILK,
   value: 40,
 })
@@ -245,7 +245,7 @@ export const milk1 = freeze({
  */
 export const milk2 = freeze({
   id: 'milk-2',
-  name: 'Grade B Milk',
+  name: 'Sustainability Grade B Milk',
   type: MILK,
   value: 80,
 })
@@ -256,7 +256,7 @@ export const milk2 = freeze({
  */
 export const milk3 = freeze({
   id: 'milk-3',
-  name: 'Grade A Milk',
+  name: 'Sustainability Grade A Milk',
   type: MILK,
   value: 120,
 })
@@ -267,7 +267,7 @@ export const milk3 = freeze({
  */
 export const rainbowMilk1 = freeze({
   id: 'rainbow-milk-1',
-  name: 'Grade C Rainbow Milk',
+  name: 'Sustainiability Grade C Rainbow Milk',
   type: MILK,
   value: 60,
 })
@@ -278,7 +278,7 @@ export const rainbowMilk1 = freeze({
  */
 export const rainbowMilk2 = freeze({
   id: 'rainbow-milk-2',
-  name: 'Grade B Rainbow Milk',
+  name: 'Sustainability Grade B Rainbow Milk',
   type: MILK,
   value: 120,
 })
@@ -289,7 +289,7 @@ export const rainbowMilk2 = freeze({
  */
 export const rainbowMilk3 = freeze({
   id: 'rainbow-milk-3',
-  name: 'Grade A Rainbow Milk',
+  name: 'Sustainability Grade A Rainbow Milk',
   type: MILK,
   value: 180,
 })
@@ -300,7 +300,7 @@ export const rainbowMilk3 = freeze({
  */
 export const chocolateMilk = freeze({
   id: 'chocolate-milk',
-  name: 'Chocolate Milk',
+  name: 'Sustainable Chocolate Milk',
   type: MILK,
   value: 80,
 })

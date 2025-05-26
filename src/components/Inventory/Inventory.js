@@ -6,13 +6,19 @@ import Checkbox from '@mui/material/Checkbox/index.js'
 import FormControlLabel from '@mui/material/FormControlLabel/index.js'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore.js'
 import { array } from 'prop-types'
-
+import {
+  countManureManagers,
+  getAdjustedCowFeedQuantity
+} from '../../utils/InventoryHelpers.js';
+import { MANURE_MANAGER_ID, ADJUSTED_COW_FEED_ITEM_ID } from '../../constants.js'
 import FarmhandContext from '../Farmhand/Farmhand.context.js'
 import Item from '../Item/index.js'
 import { itemsMap } from '../../data/maps.js'
 import { sortItems } from '../../utils/index.js'
 import SearchBar from '../SearchBar/index.js'
 import './Inventory.sass'
+
+
 
 // Using Map for categories to preserve key order and enable Map methods
 export const categoryIds = new Map([
@@ -37,6 +43,7 @@ const itemTypeCategoryMap = new Map([
   ['WATER_CREDIT', 'WATER_CREDIT'],
   ['MANURE_MANAGER', 'MANURE_MANAGER'],
 ])
+
 
 // Initialize Map to group items into categories
 const getItemCategories = () =>
@@ -79,8 +86,15 @@ const Inventory = ({
       prev.includes(category)
         ? prev.filter(c => c !== category)
         : [...prev, category]
+    
     )
   }
+const manureManagerCount = playerInventory.filter(({ id }) => id === 'manure-manager').length;
+const adjustedCowFeedItem = playerInventory.find(({ id }) => id === 'adjusted-cow-feed');
+const adjustedCowFeed = adjustedCowFeedItem ? adjustedCowFeedItem.quantity : 0;
+
+console.log('Manure Managers:', manureManagerCount);
+console.log('Adjusted Cow Feed Quantity:', adjustedCowFeed);
 
   const filteredCategories = Array.from(itemCategories.entries()).reduce(
     (filtered, [category, items]) => {
@@ -177,3 +191,15 @@ export default function Consumer(props) {
     </FarmhandContext.Consumer>
   )
 }
+/**
+ * Adjusts feed efficiency or production rate based on player upgrades.
+ * @param {number} manureManagerCount
+ * @param {number} adjustedCowFeed
+ * @returns {number} A multiplier or rate adjustment
+ */
+export const getCowEfficiencyMultiplier = (manureManagerCount, adjustedCowFeed) => {
+  const manureBonus = 1 + manureManagerCount * 0.1; // 10% per manager
+  const feedBonus = adjustedCowFeed > 0 ? 1.2 : 1.0; // 20% bonus if feed is available
+
+  return manureBonus * feedBonus;
+};

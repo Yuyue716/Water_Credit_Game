@@ -84,14 +84,13 @@ import {
   STANDARD_VIEW_LIST,
 } from '../constants.js'
 import { random } from '../common/utils.js'
-
 import { farmProductsSold } from './farmProductsSold.js'
 import { getCropLifecycleDuration } from './getCropLifecycleDuration.js'
 import { getInventoryQuantityMap } from './getInventoryQuantityMap.js'
 import { getItemBaseValue } from './getItemBaseValue.js'
 import { getLevelEntitlements } from './getLevelEntitlements.js'
 import { memoize } from './memoize.js'
-
+import { countManureManagers, getAdjustedCowFeedQuantity } from './InventoryHelpers.js'
 const Jimp = configureJimp({
   types: [jimpPng],
 })
@@ -585,23 +584,47 @@ export const generateOffspringCow = (cow1, cow2, ownerId, customProps = {}) => {
 
 /**
  * @param {farmhand.cow} cow
+ * @param {Object} inventory
+ * @param {number} inventory.manureManagerCount
+ * @param {number} inventory.adjustedCowFeed
+ * @param {number} inventory.cowCount
  * @returns {farmhand.item}
  */
-export const getCowMilkItem = ({ color, happiness }) => {
+export const getCowMilkItem = (
+  { color },
+  { manureManagerCount = 0, adjustedCowFeed = 0, cowCount = 1 } = {} // ← safe default object
+) => {
   if (color === cowColors.BROWN) {
     return chocolateMilk
   }
+  console.log('Debug cow milk inputs:', {
+    manureManagerCount,
+    adjustedCowFeed,
+    cowCount,
+})
 
   const isRainbowCow = color === cowColors.RAINBOW
 
-  if (happiness < 1 / 3) {
-    return isRainbowCow ? rainbowMilk1 : milk1
-  } else if (happiness < 2 / 3) {
-    return isRainbowCow ? rainbowMilk2 : milk2
+  let score = 0
+
+  if (manureManagerCount > 0) {
+    score += 1 / 3
   }
 
-  return isRainbowCow ? rainbowMilk3 : milk3
+  if (adjustedCowFeed >= cowCount) {
+    score += 1 / 3
+  }
+
+  if (score >= 2 / 3) {
+    return isRainbowCow ? rainbowMilk3 : milk3
+  } else if (score >= 1 / 3) {
+    return isRainbowCow ? rainbowMilk2 : milk2
+  } else {
+    return isRainbowCow ? rainbowMilk1 : milk1
+  }
 }
+
+
 
 /**
  * @param {farmhand.cow} cow

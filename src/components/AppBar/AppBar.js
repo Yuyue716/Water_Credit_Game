@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { tween } from 'shifty'
-import { array, bool, func, number, string } from 'prop-types'
+import { array, bool, func, number, string, object } from 'prop-types'
 
 import { default as MuiAppBar } from '@mui/material/AppBar/index.js'
 import Toolbar from '@mui/material/Toolbar/index.js'
@@ -9,6 +9,8 @@ import StepIcon from '@mui/material/StepIcon/index.js'
 
 import FarmhandContext from '../Farmhand/Farmhand.context.js'
 import { moneyString } from '../../utils/moneyString.js'
+import achievements from '../../data/achievements.js'
+
 import './AppBar.sass'
 
 /**
@@ -22,14 +24,11 @@ const MoneyDisplay = ({ money }) => {
   const [displayedMoney, setDisplayedMoney] = useState(money)
   const [textColor, setTextColor] = useState(idleColor)
   const [previousMoney, setPreviousMoney] = useState(money)
-  /**
-   * @type {ReturnType<typeof useState<import('shifty').Tweenable | undefined>>}
-   */
   const [currentTweenable, setCurrentTweenable] = useState()
 
   useEffect(() => {
     setPreviousMoney(money)
-  }, [money, setPreviousMoney])
+  }, [money])
 
   useEffect(() => {
     if (money !== previousMoney) {
@@ -55,18 +54,37 @@ const MoneyDisplay = ({ money }) => {
     return () => {
       currentTweenable?.cancel()
     }
-  }, [currentTweenable, money, previousMoney])
+  }, [money, previousMoney, currentTweenable])
+
+  return <span style={{ color: textColor }}>{moneyString(displayedMoney)}</span>
+}
+
+const AchievementHint = ({ completedAchievements }) => {
+  const [nextAchievement, setNextAchievement] = useState(null)
+
+  useEffect(() => {
+    const firstIncomplete = achievements.find(
+      ach => !completedAchievements[ach.id]
+    )
+    setNextAchievement(firstIncomplete || null)
+  }, [completedAchievements])
+
+  if (!nextAchievement) return null
 
   return (
-    <span
-      {...{
-        style: {
-          color: textColor,
-        },
+    <Typography
+      className="achievement-hint"
+      variant="body1"
+      style={{
+        marginTop: '4px',
+        color: '#fff',
+        fontStyle: 'italic',
+        textAlign: 'center',
+        fontSize: '1rem',
       }}
     >
-      {moneyString(displayedMoney)}
-    </span>
+      Next Goal: {nextAchievement.description}
+    </Typography>
   )
 }
 
@@ -76,61 +94,54 @@ export const AppBar = ({
   showNotifications,
   todaysNotifications,
   viewTitle,
+  completedAchievements,
 
   areAnyNotificationsErrors = todaysNotifications.some(
     ({ severity }) => severity === 'error'
   ),
 }) => (
-  <MuiAppBar
-    {...{
-      className: 'AppBar top-level',
-      position: 'fixed',
-    }}
-  >
+  <MuiAppBar className="AppBar top-level" position="fixed">
     <Toolbar
-      {...{
-        className: 'toolbar',
-      }}
+      className="toolbar"
+      style={{ width: '100%', flexDirection: 'column' }}
     >
-      {!showNotifications && (
-        <div
-          {...{
-            className: 'notification-indicator-container',
-            onClick: handleClickNotificationIndicator,
-          }}
-        >
-          <Typography>
-            <StepIcon
-              {...{ icon: Math.max(0, todaysNotifications.length - 1) }}
-            />
-          </Typography>
-          {areAnyNotificationsErrors && (
-            <Typography
-              {...{
-                className: 'error-indicator',
-              }}
-            >
-              <StepIcon {...{ error: true, icon: '' }} />
-            </Typography>
-          )}
-        </div>
-      )}
-      <Typography
-        {...{
-          className: 'stage-header',
-          variant: 'h2',
+      <div
+        style={{
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'space-between',
         }}
+      >
+        {!showNotifications && (
+          <div
+            className="notification-indicator-container"
+            onClick={handleClickNotificationIndicator}
+          >
+            <Typography>
+              <StepIcon icon={Math.max(0, todaysNotifications.length - 1)} />
+            </Typography>
+            {areAnyNotificationsErrors && (
+              <Typography className="error-indicator">
+                <StepIcon error icon="" />
+              </Typography>
+            )}
+          </div>
+        )}
+
+        <Typography className="money-display" variant="h2">
+          <MoneyDisplay money={money} />
+        </Typography>
+      </div>
+
+      <Typography
+        className="stage-header"
+        variant="h2"
+        style={{ textAlign: 'center', width: '100%' }}
       >
         {viewTitle}
       </Typography>
-      <Typography
-        {...{
-          className: 'money-display',
-          variant: 'h2',
-        }}
-      >
-        <MoneyDisplay {...{ money }} />
-      </Typography>
+
+      <AchievementHint completedAchievements={completedAchievements} />
     </Toolbar>
   </MuiAppBar>
 )
@@ -141,6 +152,7 @@ AppBar.propTypes = {
   showNotifications: bool.isRequired,
   todaysNotifications: array.isRequired,
   viewTitle: string.isRequired,
+  completedAchievements: object.isRequired,
 }
 
 export default function Consumer(props) {

@@ -12,16 +12,8 @@ export const applyLoanInterest = state => {
     castToMoney(state.loanBalance * LOAN_INTEREST_RATE)
   )
 
-  const newDayNotifications =
-    newLoanBalance > 0
-      ? [
-          ...state.newDayNotifications,
-          {
-            severity: 'warning',
-            message: LOAN_BALANCE_NOTIFICATION`${newLoanBalance}`,
-          },
-        ]
-      : state.newDayNotifications
+  // Notification removed
+  const newDayNotifications = state.newDayNotifications
 
   return {
     ...state,

@@ -88,14 +88,12 @@ const {
 const dialogTriggerTextMap = {
   [FARMERS_LOG]: "Open Farmer's Log (l)",
   [STATS]: 'View your stats (s)',
-  [ACCOUNTING]: 'View Bank Account (b)',
   [SETTINGS]: 'View Settings (comma)',
 }
 
 const dialogTitleMap = {
   [FARMERS_LOG]: "Farmer's Log",
   [STATS]: 'Farm Stats',
-  [ACCOUNTING]: 'Bank Account',
   [SETTINGS]: 'Settings',
 
   // Has no UI trigger
@@ -182,7 +180,6 @@ export const Navigation = ({
         {[
           { dialogView: FARMERS_LOG, Icon: BookIcon },
           { dialogView: STATS, Icon: AssessmentIcon },
-          { dialogView: ACCOUNTING, Icon: AccountBalanceIcon },
           { dialogView: SETTINGS, Icon: SettingsIcon },
         ].map(({ dialogView, Icon }) => (
           <Tooltip

@@ -160,23 +160,21 @@ You earned: ${rewardDescription}`
  * @returns {string}
  */
 export const LOAN_PAYOFF = () =>
-  `You paid off your loan to the bank! You're finally free!`
+  ``
 
 /**
  * @param {number} loanBalance
  * @returns {string}
  */
 export const LOAN_INCREASED = (_, loanBalance) =>
-  `You took out a new loan. Your current balance is ${moneyString(
-    loanBalance
-  )}.`
+  ``
 
 /**
  * @param {number} loanBalance
  * @returns {string}
  */
 export const LOAN_BALANCE_NOTIFICATION = (_, loanBalance) =>
-  `Your loan balance has grown to ${moneyString(loanBalance)}.`
+  ``
 
 /**
  * @param {number} newLevel

@@ -22,10 +22,10 @@ export const BREAKPOINTS = {
   XL: 1920,
 }
 
-export const STANDARD_LOAN_AMOUNT = 10000
+export const STANDARD_LOAN_AMOUNT = 3000
 
-export const LOAN_GARNISHMENT_RATE = 0.05
-export const LOAN_INTEREST_RATE = 0.02
+export const LOAN_GARNISHMENT_RATE = 0
+export const LOAN_INTEREST_RATE = 0
 
 export const FERTILIZER_BONUS = 0.5
 

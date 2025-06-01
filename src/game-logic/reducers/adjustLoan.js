@@ -16,13 +16,14 @@ export const adjustLoan = (state, adjustmentAmount) => {
   const isLoanPayoff = loanBalance === 0 && adjustmentAmount < 0
 
   if (isLoanPayoff) {
-    state = showNotification(state, LOAN_PAYOFF``, 'success')
+    // Notification removed
   } else {
     const isNewLoan = adjustmentAmount > 0
 
     if (isNewLoan) {
+      // Notification removed, only increment loan count
       state = {
-        ...showNotification(state, LOAN_INCREASED`${loanBalance}`, 'info'),
+        ...state,
         loansTakenOut: state.loansTakenOut + 1,
       }
     }

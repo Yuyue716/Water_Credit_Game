@@ -3,6 +3,7 @@
  */
 
 import {
+  cowFeed,
   watercredit,
   manureManager,
   adjustedcowFeed,
@@ -12,6 +13,7 @@ import { fertilizer } from './recipes.js'
 
 /** @type {farmhand.item[]} */
 const inventory = [
+  cowFeed,
   watercredit,
   manureManager,
   fertilizer,

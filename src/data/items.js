@@ -110,7 +110,7 @@ export {
  */
 export const rainbowFertilizer = freeze({
   description:
-    'Helps crops grow a little faster and automatically replants them upon harvesting. Consumes seeds upon replanting and disappears if none are available. Also works for Scarecrows.',
+    'Helps crops grow a little faster.',
   enablesFieldMode: fieldMode.FERTILIZE,
   id: 'rainbow-fertilizer',
   name: 'Rainbow Fertilizer',
@@ -165,7 +165,7 @@ export const scarecrow = freeze({
 export const watercredit = freeze({
   id: WATER_CREDIT_ID,
   description:
-    'Credit for waste water, each cow consume one unit of water credit per day (if you adopt sustainable farming practice, it will consume less!)',
+    'Credit to compensate for waste water. Each cow consumes one unit of water credit per day (if you adopt sustainable farming practices, it will consume less).',
   enablesFieldMode: fieldMode.USE_WATER_CREDIT, // Define this in `enums.js` if needed
   name: 'Water Credit',
   type: WATER_CREDIT,
@@ -178,7 +178,7 @@ export const watercredit = freeze({
  */
 export const manureManager = freeze({
   id: MANURE_MANAGER_ID,
-  description: 'A machine that sustainably processes manure waste. Purchasing a Manure Manager earns you one unit of water credit per cow every day!',
+  description: 'A machine that sustainably processes manure waste. Purchasing a Manure Manager earns you one unit of water credit per cow every day.',
   enablesFieldMode: fieldMode.BUY_MANURE_MANAGER, // Define this in `enums.js` if needed
   name: 'Manure Manager',
   type: MANURE_MANAGER,
@@ -210,7 +210,7 @@ export const cowFeed = freeze({
 export const adjustedcowFeed = freeze({
   id: ADJUSTED_COW_FEED_ITEM_ID,
   description:
-    'Adjusted cow feed that allow cows to produce less nitrogen. Each cow automatically consumes one unit of Adjusted Cow Feed per day. Using one unit of adjusted cow feed can earn you one unit of water credit. Fed cows gain and maintain weight.',
+    "Adjusted cow feed that reduces cows' nitrogen emmision. Each cow automatically consumes one unit of Adjusted Cow Feed per day. Using this feed will earn you one water credit per unit. Fed cows gain and maintain weight.",
   name: 'Adjusted Cow Feed',
   type: ADJUSTED_COW_FEED,
   value: 7,
@@ -235,7 +235,7 @@ export const huggingMachine = freeze({
 export const milk1 = freeze({
   id: 'milk-1',
   name: 'Sustainability Grade C Milk',
-  description: 'The sustainability grade of this milk aligns with your farms sustainbality level on that day. The more sustainable your farm is, the better price you can get when selling! ',
+  description: 'The sustainability grade of this milk aligns with your farm sustainability level on that day. The more sustainable your farm is, the better your received milk quality is.',
   type: MILK,
   value: 40,
 })
@@ -247,7 +247,7 @@ export const milk1 = freeze({
 export const milk2 = freeze({
   id: 'milk-2',
   name: 'Sustainability Grade B Milk',
-  description: 'The sustainability grade of this milk aligns with your farms sustainbality level on that day. The more sustainable your farm is, the better price you can get when selling! ',
+  description: "The sustainability grade of this milk aligns with your farms sustainability level on that day. Although great, it's not the best quality there is.",
   type: MILK,
   value: 80,
 })
@@ -259,7 +259,7 @@ export const milk2 = freeze({
 export const milk3 = freeze({
   id: 'milk-3',
   name: 'Sustainability Grade A Milk',
-  description: 'The sustainability grade of this milk aligns with your farms sustainbality level on that day. The more sustainable your farm is, the better price you can get when selling! ',
+  description: 'The sustainability grade of this milk aligns with your farms sustainability level on that day. Highest quality of milk you can receive!',
   type: MILK,
   value: 120,
 })
@@ -271,7 +271,7 @@ export const milk3 = freeze({
 export const rainbowMilk1 = freeze({
   id: 'rainbow-milk-1',
   name: 'Sustainiability Grade C Rainbow Milk',
-  description: 'The sustainability grade of this milk aligns with your farms sustainbality level on that day. The more sustainable your farm is, the better price you can get when selling! ',
+  description: 'The sustainability grade of this milk aligns with your farm sustainability level on that day. The more sustainable your farm is, the better your received milk quality is.',
   type: MILK,
   value: 60,
 })
@@ -283,7 +283,7 @@ export const rainbowMilk1 = freeze({
 export const rainbowMilk2 = freeze({
   id: 'rainbow-milk-2',
   name: 'Sustainability Grade B Rainbow Milk',
-  description: 'The sustainability grade of this milk aligns with your farms sustainbality level on that day. The more sustainable your farm is, the better price you can get when selling! ',
+  description: "The sustainability grade of this milk aligns with your farms sustainability level on that day. Although great, it's not the best quality there is.",
   type: MILK,
   value: 120,
 })
@@ -295,7 +295,7 @@ export const rainbowMilk2 = freeze({
 export const rainbowMilk3 = freeze({
   id: 'rainbow-milk-3',
   name: 'Sustainability Grade A Rainbow Milk',
-  description: 'The sustainability grade of this milk aligns with your farms sustainbality level on that day. The more sustainable your farm is, the better price you can get when selling! ',
+  description: 'The sustainability grade of this milk aligns with your farms sustainability level on that day. Highest quality of milk you can receive!',
   type: MILK,
   value: 180,
 })
@@ -306,7 +306,7 @@ export const rainbowMilk3 = freeze({
  */
 export const chocolateMilk = freeze({
   id: 'chocolate-milk',
-  name: 'Sustainable Chocolate Milk',
+  name: 'Sustainable Chocolate Milk. Contrary to the game, brown cows do not produce natural chocolate milk!',
   type: MILK,
   value: 80,
 })

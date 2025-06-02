@@ -594,9 +594,6 @@ export const getCowMilkItem = (
   { color },
   { manureManagerCount = 0, adjustedCowFeed = 0, cowCount = 1 } = {} // ← safe default object
 ) => {
-  if (color === cowColors.BROWN) {
-    return chocolateMilk
-  }
   const isRainbowCow = color === cowColors.RAINBOW
 
   let score = 0

@@ -1,28 +1,41 @@
 @import ../../styles/variables.sass
 
 .AppBar
-
   .toolbar
     display: flex
+    justify-content: space-between
+    align-items: center
+    padding: 0.5rem 1rem
 
-    h2
+    .left,
+    .center,
+    .right
+      flex: 1
+      display: flex
+      align-items: center
+
+    .left
+      justify-content: flex-start
+
+    .center
+      justify-content: center
+
+    .right
+      justify-content: flex-end
+
+    .view-title,
+    .money-display,
+    .achievement-hint
       color: #fff
+
+    .view-title
       font-family: "Francois One", monospace
       font-size: 1.2em
 
-    .stage-header
-      display: none
-      margin-left: 1em
-
-      @media (min-width: #{$break-medium-phone})
-        display: block
-
-    .money-display
-      position: absolute
-      right: 1em
-
-    .notification-indicator-container
-      display: flex
-
-      .error-indicator
-        margin-left: 1em
+    .achievement-hint
+      font-style: italic
+      font-size: 1rem
+      text-align: center
+      white-space: nowrap
+      overflow: hidden
+      text-overflow: ellipsis

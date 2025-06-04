@@ -74,7 +74,7 @@ const Home = ({
         </h1>
       </>
     ) : (
-      <h1>Explore the water credit with a farming game!</h1>
+      <h1>READ THE INSTRUCTIONS BEFORE PLAYING THE GAME</h1>
     )}
     <Accordion>
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
@@ -95,6 +95,24 @@ This game is still in alpha version, so any opinions and suggestions are welcome
       </AccordionDetails>
     </Accordion>
     <Divider />
+    <Card>
+  <CardContent>
+    <h3>Watch the WOWCOW Tutorial</h3>
+    <div className="video-container">
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/Cof0FtUegKQ?si=L1I0G-cspfk22t9t"
+        title="YouTube video player"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerPolicy="strict-origin-when-cross-origin"
+        allowFullScreen
+      ></iframe>
+    </div>
+  </CardContent>
+</Card>
+<Divider />
     <Card>
       <CardContent>
         <ReactMarkdown
@@ -141,40 +159,10 @@ It looks like you're new here. Thanks for stopping by! Here are some goals to he
             </ul>
           </>
         ) : null}
-        <Button
-          {...{
-            color: 'primary',
-            onClick: () => handleViewChangeButtonClick(stageFocusType.SHOP),
-            variant: 'contained',
-          }}
-        >
-          Go to the shop
-        </Button>
       </CardContent>
     </Card>
     <Divider />
-    {isInstallable && (
-      <>
-        <Card>
-          <CardContent>
-            <ReactMarkdown
-              {...{
-                className: 'markdown',
-                linkTarget: '_blank',
-                source: `
-### Installation
 
-Farmhand can be installed to your device right from this web page! Once installed, the game can be played with or without an internet connection.
-
-If you're playing on a mobile device, all you need to do is [add it to your home screen](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Guides/Installing#add_to_home_screen). If you're playing it on desktop Chrome or Microsoft Edge, [you can install it as an app there as well](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Guides/Installing#installing_pwas).
-    `,
-              }}
-            />
-          </CardContent>
-        </Card>
-        <Divider />
-      </>
-    )}
     <Card>
       <CardContent>
         <ReactMarkdown
@@ -183,20 +171,30 @@ If you're playing on a mobile device, all you need to do is [add it to your home
             linkTarget: '_blank',
             source: `
 ### A few other tips
+* Follow the goals to enjoy the game in the best way possible.
 
 * Press the red bed button in the top-right of the screen to end the farm day and advance the game. This also saves your progress.
 
 * Your milk sustainability level aligns with your farms' sustainability level displayed at the navigation bar. 
 
-* You can check your daily log, farm stats, achievements and settings at the blue icons in the navigation bar.
+* You can check your daily log, farm stats, and settings at the blue icons in the navigation bar.
 
 * Make sure you feed your cows everyday, otherwise they will starve and run away!
 
-* Press "Shift + ?" to see all of the keyboard shortcuts available to you.
+* If you wish to restart the game, find the Settings button and at the very bottom you can delete your progress. Refresh the website to receive a new farm!
 
     `,
           }}
         />
+        <Button
+          {...{
+            color: 'primary',
+            onClick: () => handleViewChangeButtonClick(stageFocusType.COW_PEN),
+            variant: 'contained',
+          }}
+        >
+          Go to the Cow Pen
+        </Button>
       </CardContent>
     </Card>
   </div>
